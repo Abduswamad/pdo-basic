@@ -1,5 +1,23 @@
 <?php
  class Form {
+    public function staff_forms($staff_id)
+    {
+        try{
+            
+            $db = getDB();
+            $stmt = $db->prepare("SELECT * FROM form frm 
+            inner join form_step fst on frm.form_step = fst.step_id
+            inner  join student std on std.student_number = frm.student
+            inner join department dpt  on dpt.department_number = std.department
+             ");
+            $stmt->execute();
+            $data = $stmt->fetchAll();
+            return $data;
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
+    }
     public function student_form($student_id)
     {
         try{

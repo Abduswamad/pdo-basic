@@ -139,7 +139,7 @@
     {
         try{
             $db = getDB();
-            $stmt = $db->prepare("SELECT staff_type,first_name,middle_name,last_name FROM staff WHERE staff_number=:staff_number");
+            $stmt = $db->prepare("SELECT staff_type,first_name,middle_name,last_name,staff_type FROM staff WHERE staff_number=:staff_number");
             $stmt->bindParam("staff_number", $sessin_id,PDO::PARAM_STR);
             $stmt->execute();
             $data = $stmt->fetch(PDO::FETCH_OBJ); //User data

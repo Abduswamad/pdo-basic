@@ -17,7 +17,7 @@
                 <span class="nav-link-text ms-1">Home</span>
             </a>
         </li>
-        <li class="nav-item mt-9">
+        <li class="nav-item mt-5">
             <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
         <li class="nav-item">
