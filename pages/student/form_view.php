@@ -1,7 +1,7 @@
 <?php
     include('../config.php');
     include('../session.php');
-    $page_tittle = "HOME PAGE ";
+    $page_tittle = "FORM VIEW ";
     $SessinUser=$account_class->student_session_detail($login_session_id);
     $forms=$form_class->student_form($login_session_id);
 ?>
@@ -40,49 +40,16 @@
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                   <div class="row">
                       <div class="col-6">
-                        <h6 class="text-white  text-capitalize ps-3">CLEARANCE FORMS </h6>
+                        <h6 class="text-white  text-capitalize ps-3">STUDENT NUMBER  <?php echo  $login_session_id?></h6>
                       </div>
-                      <div class="col-6 text-end "> 
-                          <a href="../actions/action_start_form.php?student_id=<?php echo  $login_session_id?>" class="btn btn-outline-primary btn-sm mb-0 bg-white ">Start A form</a>
-                      </div>
+                      <!-- <div class="col-6 text-end "> 
+                          <a href="#" class="btn btn-outline-primary btn-sm mb-0 bg-white ">Print</a>
+                      </div> -->
                   </div>
                 </div>
               </div>
               <div class="card-body px-0 pb-2">
-                <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Student Number</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Department</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Step</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      <?php
-                        foreach ($forms as $form) {
-                          echo "
-                          <tr>
-                            <td class='align-middle text-center text-sm'>
-                              <span class='text-secondary text-xs font-weight-bold'>{$form['student']}</span>
-                            </td>
-                            <td class='align-middle text-center text-sm'>
-                              <span class='text-secondary text-xs font-weight-bold'>{$form['department_name']}</span>
-                            </td>
-                            <td class='align-middle text-center text-sm'>
-                              <span class='text-secondary text-xs font-weight-bold'>{$form['step_name']}</span>
-                            </td>
-                            <td class='align-middle text-center'>
-                              <a href='./form_view.php?form_id={$form['form_id']}' class='btn btn-success'>view</a>
-                            </td>
-                          </tr>
-                        ";
-                        }
-                      ?>
-                  </tbody>
-                </table>
-                </div>
+                gorm
               </div>
               <div class="card-footer">
               </div>

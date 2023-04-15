@@ -63,27 +63,27 @@
                   </thead>
                   <tbody>
                       <?php
-                        foreach ($students as $staff) {
+                        foreach ($students as $student) {
                           echo "
                           <tr>
                             <td class='align-middle text-center text-sm'>
-                              <span class='text-secondary text-xs font-weight-bold'>{$staff['student_number']}</span>
+                              <span class='text-secondary text-xs font-weight-bold'>{$student['student_number']}</span>
                             </td>
                             <td class='align-middle text-center text-sm'>
-                              <span class='text-secondary text-xs font-weight-bold'>{$staff['first_name']}</span>
+                              <span class='text-secondary text-xs font-weight-bold'>{$student['first_name']}</span>
                             </td>
                             <td class='align-middle text-center text-sm'>
-                              <span class='text-secondary text-xs font-weight-bold'>{$staff['middle_name']}</span>
+                              <span class='text-secondary text-xs font-weight-bold'>{$student['middle_name']}</span>
                             </td>
                             <td class='align-middle text-center'>
-                              <span class='text-secondary text-xs font-weight-bold'>{$staff['last_name']}</span>
+                              <span class='text-secondary text-xs font-weight-bold'>{$student['last_name']}</span>
                             </td>
                             <td class='align-middle text-center'>
-                              <span class='text-secondary text-xs font-weight-bold'>{$staff['gender_name']}</span>
+                              <span class='text-secondary text-xs font-weight-bold'>{$student['gender_name']}</span>
                             </td>
                             <td class='align-middle text-center'>
-                              <a href='./edit_student.php?id={$staff['student_number']}' class='btn btn-success'>Edit</a>
-                              <button onclick='myFunction(\"{$staff['student_number']}\")' class='btn btn-primary'>Delete</button>
+                              <a href='./edit_student.php?id={$student['student_number']}' class='btn btn-success'>Edit</a>
+                              <button onclick='myFunction(\"{$student['student_number']}\")' class='btn btn-primary'>Delete</button>
                             </td>
                           </tr>
                         ";
