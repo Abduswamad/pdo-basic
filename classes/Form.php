@@ -141,15 +141,16 @@
             $stmt->bindParam("form_id", $form,PDO::PARAM_STR);
             $stmt->execute();
             $data = $stmt->fetch(PDO::FETCH_OBJ); 
-            $form_step =  $data -> form_step;
+            $form_step =  $data->form_step;
             if($decission == "Accept")
             {
                 $form_step = $form_step+1;
                 $stmt = $db->prepare("update form  set  form_step = :form_step
                 where  form_id = :form_id");
                 $stmt->bindParam("form_id", $form,PDO::PARAM_INT);
-                $stmt->bindParam("form_step", $$form_step,PDO::PARAM_INT);
+                $stmt->bindParam("form_step", $form_step,PDO::PARAM_INT);
                 $stmt->execute();
+                $form_step = $form_step-1;
                 
             }
             $stmt = $db->prepare("Insert into form_comment (form,staff,comment,comment_date,step)
