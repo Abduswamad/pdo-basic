@@ -1,5 +1,39 @@
 <?php
  class Form {
+    public function form_detail($id)
+    {
+        try{
+            $db = getDB();
+            $stmt = $db->prepare("SELECT 
+                frm.form_id,
+                frm.student,
+                frm.form_step,
+                std.first_name,
+                std.middle_name,
+                std.last_name,
+                std.completion_year,
+                gnd.gender_name,
+                dpt.department_name,
+                fstp.step_name
+            FROM form frm
+            inner join student std
+            on std.student_number = frm.student
+            inner join  gender gnd
+            on gnd.gender_id = std.gender
+            inner join  department dpt
+            on dpt.department_number = std.department
+            inner join form_step fstp
+            on fstp.step_id = frm.form_step
+            WHERE frm.form_id = :form_id ");
+            $stmt->bindParam("form_id", $id,PDO::PARAM_STR);
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_OBJ); 
+            return $data;
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"get_staff":'. $e->getMessage() .'}}';
+        }
+    }
     public function staff_forms($staff_id)
     {
         try{

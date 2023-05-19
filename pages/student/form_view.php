@@ -4,6 +4,8 @@
     $page_tittle = "FORM VIEW ";
     $SessinUser=$account_class->student_session_detail($login_session_id);
     $forms=$form_class->student_form($login_session_id);
+    $id =$_GET['form_id'];
+    $form_detail=$form_class->form_detail($id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +50,56 @@
                   </div>
                 </div>
               </div>
-              <div class="card-body px-0 pb-2">
-                gorm
+              <div class="card-body  pb-2">
+              <div class="row">
+                  <div class="col-8">
+                   <div class="row"> 
+                      <div class="col-6">
+                        Student Name:
+                      </div>
+                      <div class="col-6">
+                      <?php
+                         $name =   $form_detail->last_name. ", ".$form_detail->first_name. " ". $form_detail->middle_name. ".";
+                       echo  $name ?>
+                      </div>
+                      <div class="col-6">
+                        Student Gender:
+                      </div>
+                      <div class="col-6">
+                      <?php
+                         $gender = $form_detail->gender_name;
+                       echo  $gender ?>
+                      </div>
+                      <div class="col-6">
+                        Student Department:
+                      </div>
+                      <div class="col-6">
+                      <?php
+                         $dapartment = $form_detail->department_name;
+                       echo  $dapartment ?>
+                      </div>
+                      <div class="col-6">
+                        Completion Year:
+                      </div>
+                      <div class="col-6">
+                      <?php
+                         $year =  $form_detail->completion_year ;
+                       echo  $year ?>
+                      </div>
+                      <div class="col-6">
+                        Form Step:
+                      </div>
+                      <div class="col-6">
+                      <?php
+                         $step =  $form_detail->step_name ;
+                       echo  $step ?>
+                      </div>
+                   </div>
+                  </div>
+                  <div class="col-4">
+                    image
+                  </div>
+                </div>
               </div>
               <div class="card-footer">
               </div>
