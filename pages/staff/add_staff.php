@@ -4,6 +4,7 @@
     $page_tittle = "ADD NEW STAFF ";
     $SessinUser=$account_class->staff_session_detail($login_session_id);
     $staff_roles=$staff_class->get_all_staff_role();
+    $staff_departments=$staff_class->get_all_staff_department();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +70,18 @@
                               foreach ($staff_roles as $staff_role) {
                                 echo "
                                     <option value='{$staff_role['role_id']}'>{$staff_role['role_name']}</option>
+                                ";
+                              }
+                            ?>
+                        </select>
+                      </div>
+                      <div class="input-group input-group-outline mb-3">
+                        <select class="form-control" name="staff_department"  required>
+                            <option value="">Select Staff Department</option>
+                            <?php
+                              foreach ($staff_departments as $staff_department) {
+                                echo "
+                                    <option value='{$staff_department['department_number']}'>{$staff_department['department_name']}</option>
                                 ";
                               }
                             ?>

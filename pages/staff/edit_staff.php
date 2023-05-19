@@ -3,7 +3,7 @@
     include('../session.php');
     $page_tittle = "EDIT STAFF ";
     $SessinUser=$account_class->staff_session_detail($login_session_id);
-    $staff_types=$staff_class->get_all_staff_type();
+    $staff_roles=$staff_class->get_all_staff_role();
     $id =$_GET['id'];
     $StaffData=$staff_class->get_staff($id);
 ?>
@@ -65,12 +65,12 @@
                         <input type="text"   placeholder=" Last Name "  value ="<?php  echo $StaffData->last_name;?>" required name="last_name" class="form-control">
                       </div>
                       <div class="input-group input-group-outline mb-3">
-                        <select class="form-control" name="staff_type"  required>
+                        <select class="form-control" name="staff_role"  required>
                           <?php
-                            $selected_value = $StaffData->staff_type;
-                            foreach ($staff_types as $staff_type) {
-                              $selected = ($staff_type['type_id'] == $selected_value) ? 'selected' : '';
-                              echo "<option value='{$staff_type['type_id']}' $selected>{$staff_type['type_name']}</option>";
+                            $selected_value = $StaffData->staff_role;
+                            foreach ($staff_roles as $staff_role) {
+                              $selected = ($staff_role['role_id'] == $selected_value) ? 'selected' : '';
+                              echo "<option value='{$staff_role['role_id']}' $selected>{$staff_role['role_name']}</option>";
                             }
                           ?>
                         </select>

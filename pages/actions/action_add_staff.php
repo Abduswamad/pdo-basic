@@ -7,12 +7,14 @@
     $middle_name=$_POST['middle_name'];
     $last_name=$_POST['last_name'];
     $staff_role=$_POST['staff_role'];
+    $staff_department=$_POST['staff_department'];
     if(strlen(trim($staff_number))>1 && strlen(trim($first_name))>1
     && strlen(trim($middle_name))>1 && strlen(trim($last_name))>1
     )
     {
-        
-        $exec=$staff_class->add_staff($staff_number,$first_name,$middle_name,$last_name,$staff_role);
+       
+       
+        $exec=$staff_class->add_staff($staff_number,$first_name,$middle_name,$last_name,$staff_role,$staff_department);
         if($exec)
         {
             $url=BASE_URL.'pages/staff/staffs.php?successsMsg=Succsfull added staff '. $staff_number . '.';

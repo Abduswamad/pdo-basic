@@ -79,7 +79,7 @@
                                     <span class='text-secondary text-xs font-weight-bold'>{$staff['last_name']}</span>
                                   </td>
                                   <td class='align-middle text-center'>
-                                      <span class='badge badge-sm bg-gradient-secondary'>{$staff['type_name']}</span>
+                                      <span class='badge badge-sm bg-gradient-secondary'>{$staff['role_name']}</span>
                                   </td>
                                   <td class='align-middle text-center'>
                                       <a href='./edit_staff.php?id={$staff['staff_number']}' class='btn btn-success'>Edit</a>

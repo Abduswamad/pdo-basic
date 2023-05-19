@@ -6,8 +6,8 @@
     $first_name=$_POST['first_name'];
     $middle_name=$_POST['middle_name'];
     $last_name=$_POST['last_name'];
-    $staff_type=$_POST['staff_type'];
-    $exec=$staff_class->edit_staff($staff_number,$first_name,$middle_name,$last_name,$staff_type);
+    $staff_role=$_POST['staff_role'];
+    $exec=$staff_class->edit_staff($staff_number,$first_name,$middle_name,$last_name,$staff_role);
     $url=BASE_URL.'pages/staff/staffs.php?successsMsg=Succesfully edited staff '. $staff_number . '.';
     header("Location: $url"); 
 ?>

@@ -28,7 +28,7 @@
         }
     }
 
-    public function add_student($student_number,$first_name,$middle_name,$last_name,$gender)
+    public function add_student($student_number,$first_name,$middle_name,$last_name,$gender,$student_department)
     {
         try{
             
@@ -44,13 +44,14 @@
             }
             else
             {
-                $stmt = $db->prepare("Insert into student (student_number,first_name,middle_name,last_name,gender)
-                 values (:student_number,:first_name,:middle_name,:last_name,:gender)");
+                $stmt = $db->prepare("Insert into student (student_number,first_name,middle_name,last_name,gender,department)
+                 values (:student_number,:first_name,:middle_name,:last_name,:gender,:student_department)");
                 $stmt->bindParam("student_number", $student_number,PDO::PARAM_STR);
                 $stmt->bindParam("first_name", $first_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("middle_name", $middle_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("last_name", $last_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("gender", $gender,PDO::PARAM_INT) ;
+                $stmt->bindParam("student_department", $student_department,PDO::PARAM_INT) ;
                 $stmt->execute();
                 $db = null;
                 return true;

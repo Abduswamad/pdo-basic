@@ -16,6 +16,20 @@
             echo '{"error":{"text":'. $e->getMessage() .'}}';
         }
     }
+
+    public function get_all_staff_department()
+    {
+        try{
+            $db = getDB();
+            $stmt = $db->prepare("SELECT *  FROM department ");
+            $stmt->execute();
+            $data = $stmt->fetchAll();
+            return $data;
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
+    }
     public function get_all_staff_role()
     {
         try{
@@ -30,7 +44,7 @@
         }
     }
 
-    public function add_staff($staff_number,$first_name,$middle_name,$last_name,$staff_role)
+    public function add_staff($staff_number,$first_name,$middle_name,$last_name,$staff_role,$staff_department)
     {
         try{
             $db = getDB();
@@ -40,18 +54,20 @@
             $count=$stmt->rowCount();
             if($count==1)
             { 
+                
                 $db = null;
                 return false;
             }
             else
             {
-                $stmt = $db->prepare("Insert into staff (staff_number,first_name,middle_name,last_name,staff_role)
-                 values (:staff_number,:first_name,:middle_name,:last_name,:staff_role)");
+                $stmt = $db->prepare("Insert into staff (staff_number,first_name,middle_name,last_name,staff_role,department)
+                 values (:staff_number,:first_name,:middle_name,:last_name,:staff_role,:staff_department)");
                 $stmt->bindParam("staff_number", $staff_number,PDO::PARAM_STR);
                 $stmt->bindParam("first_name", $first_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("middle_name", $middle_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("last_name", $last_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("staff_role", $staff_role,PDO::PARAM_INT) ;
+                $stmt->bindParam("staff_department", $staff_department,PDO::PARAM_INT) ;
                 $stmt->execute();
                 $db = null;
                 return true;
@@ -83,7 +99,7 @@
         try{
             $db = getDB();
             $stmt = $db->prepare("SELECT *  FROM staff stf
-            inner join staff_role stp on stp.type_id = stf.staff_role
+            inner join staff_role stp on stp.role_id = stf.staff_role
             WHERE staff_number = :staff_number ");
             $stmt->bindParam("staff_number", $id,PDO::PARAM_STR);
             $stmt->execute();

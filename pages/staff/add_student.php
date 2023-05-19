@@ -4,6 +4,7 @@
     $page_tittle = "ADD NEW STUDENT ";
     $SessinUser=$account_class->staff_session_detail($login_session_id);
     $genders=$student_class->get_all_gender();
+    $staff_departments=$staff_class->get_all_staff_department();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +70,18 @@
                               foreach ($genders as $gender) {
                                 echo "
                                     <option value='{$gender['gender_id']}'>{$gender['gender_name']}</option>
+                                ";
+                              }
+                            ?>
+                        </select>
+                      </div>
+                      <div class="input-group input-group-outline mb-3">
+                        <select class="form-control" name="student_department"  required>
+                            <option value="">Select Student Department</option>
+                            <?php
+                              foreach ($staff_departments as $staff_department) {
+                                echo "
+                                    <option value='{$staff_department['department_number']}'>{$staff_department['department_name']}</option>
                                 ";
                               }
                             ?>
