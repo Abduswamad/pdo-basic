@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2023 at 03:17 PM
+-- Generation Time: May 19, 2023 at 09:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -51,13 +51,6 @@ CREATE TABLE `form` (
   `form_step` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `form`
---
-
-INSERT INTO `form` (`form_id`, `student`, `form_step`) VALUES
-(2, 'student_number', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -66,8 +59,7 @@ INSERT INTO `form` (`form_id`, `student`, `form_step`) VALUES
 
 CREATE TABLE `form_comment` (
   `comment_id` int(11) NOT NULL,
-  `form` int(11) NOT NULL,
-  `student` varchar(50) NOT NULL,
+  `form` bigint(20) NOT NULL,
   `staff` varchar(50) NOT NULL,
   `comment` varchar(255) NOT NULL,
   `comment_date` datetime NOT NULL,
@@ -127,7 +119,7 @@ CREATE TABLE `staff` (
   `staff_number` varchar(50) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `middle_name` varchar(50) NOT NULL,
-  `staff_type` int(11) NOT NULL,
+  `staff_role` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(250) NOT NULL,
   `last_name` varchar(50) NOT NULL,
@@ -139,28 +131,28 @@ CREATE TABLE `staff` (
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`staff_number`, `first_name`, `middle_name`, `staff_type`, `email`, `password`, `last_name`, `department`, `title`) VALUES
-('12345', 'Lolote', 'Sijui', 100, 'sijui@sijui.sijui', 'dfca14ec03430861b3c0ebc65e25a3368c5b5d3fc0ab07e3ede2ecfdbfbc8350', 'Abdul', 0, ''),
-('admin_number', 'clarencen', 'clarencen', 1, 'admin@ardhi.edu.tz', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'lane', 0, '');
+INSERT INTO `staff` (`staff_number`, `first_name`, `middle_name`, `staff_role`, `email`, `password`, `last_name`, `department`, `title`) VALUES
+('admin_number', 'clarencen', 'clarencen', 100, 'admin@ardhi.edu.tz', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'lane', 1, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff_type`
+-- Table structure for table `staff_role`
 --
 
-CREATE TABLE `staff_type` (
-  `type_id` int(11) NOT NULL,
-  `type_name` varchar(50) NOT NULL
+CREATE TABLE `staff_role` (
+  `role_id` int(11) NOT NULL,
+  `role_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `staff_type`
+-- Dumping data for table `staff_role`
 --
 
-INSERT INTO `staff_type` (`type_id`, `type_name`) VALUES
-(2, 'Account'),
-(3, 'Librarian'),
+INSERT INTO `staff_role` (`role_id`, `role_name`) VALUES
+(1, 'Librarian'),
+(2, 'Game Coach'),
+(7, 'Head Of Department'),
 (100, 'Admin');
 
 -- --------------------------------------------------------
@@ -180,13 +172,6 @@ CREATE TABLE `student` (
   `department` int(11) NOT NULL,
   `completion_year` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `student`
---
-
-INSERT INTO `student` (`student_number`, `user_name`, `password`, `first_name`, `middle_name`, `last_name`, `gender`, `department`, `completion_year`) VALUES
-('student_number', 'student@ardhi.edu.tz', '264c8c381bf16c982a4e59b0dd4c6f7808c51a05f64c35db42cc78a2a72875bb', 'loverina', 'Crispon', 'Mtesigwa', 1, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -212,7 +197,6 @@ ALTER TABLE `form`
 ALTER TABLE `form_comment`
   ADD PRIMARY KEY (`comment_id`),
   ADD KEY `rfr` (`form`),
-  ADD KEY `rrrrrr` (`student`),
   ADD KEY `dddd` (`staff`),
   ADD KEY `ee` (`step`);
 
@@ -233,21 +217,20 @@ ALTER TABLE `gender`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`staff_number`),
-  ADD KEY `staff_type` (`staff_type`),
+  ADD KEY `staff_type` (`staff_role`),
   ADD KEY `drp` (`department`);
 
 --
--- Indexes for table `staff_type`
+-- Indexes for table `staff_role`
 --
-ALTER TABLE `staff_type`
-  ADD PRIMARY KEY (`type_id`);
+ALTER TABLE `staff_role`
+  ADD PRIMARY KEY (`role_id`);
 
 --
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`student_number`),
-  ADD UNIQUE KEY `user_name` (`user_name`),
   ADD KEY `gender` (`gender`),
   ADD KEY `depart` (`department`);
 
@@ -259,13 +242,46 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `form`
 --
 ALTER TABLE `form`
-  MODIFY `form_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `form_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `form_comment`
 --
 ALTER TABLE `form_comment`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `form`
+--
+ALTER TABLE `form`
+  ADD CONSTRAINT `form_ibfk_1` FOREIGN KEY (`student`) REFERENCES `student` (`student_number`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `form_ibfk_2` FOREIGN KEY (`form_step`) REFERENCES `form_step` (`step_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `form_comment`
+--
+ALTER TABLE `form_comment`
+  ADD CONSTRAINT `form_comment_ibfk_2` FOREIGN KEY (`step`) REFERENCES `form_step` (`step_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `form_comment_ibfk_3` FOREIGN KEY (`staff`) REFERENCES `staff` (`staff_number`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `form_comment_ibfk_4` FOREIGN KEY (`form`) REFERENCES `form` (`form_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `staff`
+--
+ALTER TABLE `staff`
+  ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`department`) REFERENCES `department` (`department_number`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`staff_role`) REFERENCES `staff_role` (`role_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `student`
+--
+ALTER TABLE `student`
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`gender`) REFERENCES `gender` (`gender_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`department`) REFERENCES `department` (`department_number`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -14,12 +14,12 @@
         $exec=$student_class->add_student($student_number,$first_name,$middle_name,$last_name,$gender);
         if($exec)
         {
-            $url=BASE_URL.'pages/staff/students.php?successsMsg=Succsfull added staff '. $student_number . '.';
+            $url=BASE_URL.'pages/staff/students.php?successsMsg=Succsfull added student '. $student_number . '.';
             header("Location: $url"); 
         }
         else
         {
-            $url=BASE_URL.'pages/staff/add_student.php?errorMsg=The staff '. $student_number . ' is existed.';
+            $url=BASE_URL.'pages/staff/add_student.php?errorMsg=The student '. $student_number . ' is existed.';
             header("Location: $url"); 
         }
     }else{

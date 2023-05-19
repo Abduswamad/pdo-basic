@@ -31,6 +31,7 @@
     public function add_student($student_number,$first_name,$middle_name,$last_name,$gender)
     {
         try{
+            
             $db = getDB();
             $stmt = $db->prepare("SELECT * FROM student WHERE student_number=:student_number");
             $stmt->bindParam("student_number", $student_number,PDO::PARAM_STR);

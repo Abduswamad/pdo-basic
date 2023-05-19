@@ -58,6 +58,9 @@
                   </thead>
                   <tbody>
                       <?php
+                        if($forms == null){
+                            $forms = []; 
+                        }
                         foreach ($forms as $form) {
                           echo "
                           <tr>
@@ -82,7 +85,9 @@
                 </div>
               </div>
               <div class="card-footer">
-                Total is <?php  echo count($forms)?>
+                Total is <?php
+                     echo count($forms);
+                ?>
               </div>
             </div>
           </div>
