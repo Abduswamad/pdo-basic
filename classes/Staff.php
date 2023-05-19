@@ -5,7 +5,7 @@
         try{
             $db = getDB();
             $stmt = $db->prepare("SELECT *  FROM staff stf
-             inner join staff_role stp on stp.type_id = stf.staff_role
+             inner join staff_role stp on stp.role_id = stf.staff_role
              WHERE staff_number != :staff_number ");
             $stmt->bindParam("staff_number", $sessin_id,PDO::PARAM_STR);
             $stmt->execute();

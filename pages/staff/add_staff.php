@@ -3,7 +3,7 @@
     include('../session.php');
     $page_tittle = "ADD NEW STAFF ";
     $SessinUser=$account_class->staff_session_detail($login_session_id);
-    $staff_types=$staff_class->get_all_staff_type();
+    $staff_roles=$staff_class->get_all_staff_role();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,12 +63,12 @@
                         <input type="text"   placeholder=" Last Name " required name="last_name" class="form-control">
                       </div>
                       <div class="input-group input-group-outline mb-3">
-                        <select class="form-control" name="staff_type"  required>
-                            <option value="">Select Staff Type</option>
+                        <select class="form-control" name="staff_role"  required>
+                            <option value="">Select Staff Role</option>
                             <?php
-                              foreach ($staff_types as $staff_type) {
+                              foreach ($staff_roles as $staff_role) {
                                 echo "
-                                    <option value='{$staff_type['type_id']}'>{$staff_type['type_name']}</option>
+                                    <option value='{$staff_role['role_id']}'>{$staff_role['role_name']}</option>
                                 ";
                               }
                             ?>
