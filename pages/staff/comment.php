@@ -1,9 +1,9 @@
 <?php
     include('../config.php');
     include('../session.php');
-    $page_tittle = "FORM VIEW ";
+    $page_tittle = "FORM COMMENT ";
     $SessinUser=$account_class->staff_session_detail($login_session_id);
-    $forms=$form_class->staff_forms($login_session_id);
+    $staff_roles=$staff_class->get_all_staff_role();
     $id =$_GET['id'];
     $form_detail=$form_class->form_detail($id);
 ?>
@@ -42,67 +42,41 @@
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                   <div class="row">
                       <div class="col-6">
-                        <h6 class="text-white  text-capitalize ps-3">STUDENT NUMBER  <?php echo  $form_detail->student ?></h6>
+                        <h6 class="text-white  text-capitalize ps-3">STUDENT  NUMBER:   <?php  echo $form_detail->student;?></h6>
                       </div>
                       <div class="col-6 text-end "> 
-                          <a href="comment.php?id=<?php echo  $form_detail->form_id ?>" class="btn btn-outline-primary btn-sm mb-0 bg-white ">Comment</a>
+                      <h6 class="text-white  text-capitalize ps-3"> STUDENT NAME:   <?php  echo  $form_detail->last_name. ", ".$form_detail->first_name. " ". $form_detail->middle_name. ".";?></h6>
                       </div> 
                   </div>
                 </div>
               </div>
-              <div class="card-body  pb-2">
+              <div class="card-body px-0 pb-2">
                 <div class="row">
+                  <div class="col-2"></div>
                   <div class="col-8">
-                   <div class="row"> 
-                      <div class="col-6">
-                        Student Name:
+                    <form role="form" action="../actions/action_comment_staff.php"  method="post"class="text-start">
+                      <input type= "hidden" name="form" value = "<?php  echo $id ;?>"></input>
+                      <input type= "hidden" name="staff_id" value = "<?php  echo $login_session_id ;?>"></input>
+                      <div class="input-group input-group-outline my-3">
+                       <textarea   placeholder="Comment" id="comment" name="comment" rows="10"  required   class="form-control"></textarea>
                       </div>
-                      <div class="col-6">
-                      <?php
-                         $name =   $form_detail->last_name. ", ".$form_detail->first_name. " ". $form_detail->middle_name. ".";
-                       echo  $name ?>
+                      <div class="input-group input-group-outline mb-3">
+                        <select class="form-control" name="decission"  required>
+                        <option value = "">Select Decission </option>
+                          <option value = "Accept">Accept </option>
+                          <option value = "Reject">Reject </option>
+                        </select>
                       </div>
-                      <div class="col-6">
-                        Student Gender:
+                      <div class="text-center">
+                        <button type="submit" name="Submit"  class="btn bg-gradient-primary w-100 my-4 mb-2">Submit</button>
                       </div>
-                      <div class="col-6">
-                      <?php
-                         $gender = $form_detail->gender_name;
-                       echo  $gender ?>
-                      </div>
-                      <div class="col-6">
-                        Student Department:
-                      </div>
-                      <div class="col-6">
-                      <?php
-                         $dapartment = $form_detail->department_name;
-                       echo  $dapartment ?>
-                      </div>
-                      <div class="col-6">
-                        Completion Year:
-                      </div>
-                      <div class="col-6">
-                      <?php
-                         $year =  $form_detail->completion_year ;
-                       echo  $year ?>
-                      </div>
-                      <div class="col-6">
-                        Form Step:
-                      </div>
-                      <div class="col-6">
-                      <?php
-                         $step =  $form_detail->step_name ;
-                       echo  $step ?>
-                      </div>
-                   </div>
+                    </form>
                   </div>
-                  <div class="col-4">
-                    image
-                  </div>
+                  <div class="col-2"></div>
                 </div>
               </div>
               <div class="card-footer">
-                
+               
               </div>
             </div>
           </div>

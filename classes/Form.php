@@ -104,7 +104,7 @@
     {
         try{
             $db = getDB();
-            $form_step =7;
+            $form_step =8;
             $stmt = $db->prepare("SELECT * FROM form WHERE student=:student_id and form_step != :form_step");
             $stmt->bindParam("student_id", $student_id,PDO::PARAM_STR);
             $stmt->bindParam("form_step", $form_step,PDO::PARAM_INT);
@@ -126,6 +126,41 @@
                 $db = null;
                 return true;
             }
+           
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"add_staff":'. $e->getMessage() .'}}';
+        }
+    }
+
+    public function add_comment_staff($form,$decission,$comment,$staff_id)
+    {
+        try{
+            $db = getDB();
+            $stmt = $db->prepare("SELECT * FROM form WHERE form_id=:form_id ");
+            $stmt->bindParam("form_id", $form,PDO::PARAM_STR);
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_OBJ); 
+            $form_step =  $data -> form_step;
+            if($decission == "Accept")
+            {
+                $form_step = $form_step+1;
+                $stmt = $db->prepare("update form  set  form_step = :form_step
+                where  form_id = :form_id");
+                $stmt->bindParam("form_id", $form,PDO::PARAM_INT);
+                $stmt->bindParam("form_step", $$form_step,PDO::PARAM_INT);
+                $stmt->execute();
+                
+            }
+            $stmt = $db->prepare("Insert into form_comment (form,staff,comment,comment_date,step)
+            values (:form,:staff,:comment,CURRENT_TIMESTAMP(),:step)");
+            $stmt->bindParam("form", $form,PDO::PARAM_INT);
+            $stmt->bindParam("staff", $staff_id,PDO::PARAM_STR);
+            $stmt->bindParam("comment", $comment,PDO::PARAM_STR);
+            $stmt->bindParam("step", $form_step,PDO::PARAM_INT);
+            $stmt->execute();
+            $db = null;
+            return true;
            
         }
         catch(PDOException $e) {
