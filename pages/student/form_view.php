@@ -6,6 +6,7 @@
     $forms=$form_class->student_form($login_session_id);
     $id =$_GET['form_id'];
     $form_detail=$form_class->form_detail($id);
+    $form_comments=$form_class->form_comment($id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,6 +106,47 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="row">
+          <?php
+              if($form_comments == null){
+                  $form_comments = []; 
+              }
+              foreach ($form_comments as $form_comment) {
+                echo "
+                <div class='row'>
+                  <div class='col-12'>
+                  <div class='card my-4'>
+                    <div class='card-header p-0 position-relative mt-n4 mx-3 z-index-2'>
+                      <div class='bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3'>
+                        <div class='row'>
+                            <div class='col-6'>
+                              <h6 class='text-white  text-capitalize ps-3'>COMENTOR: {$form_comment['last_name']}, {$form_comment['first_name']} {$form_comment['middle_name']}. </h6>
+                            </div>
+                            <div class='col-6 text-end ''> 
+                                <h6 class='text-white   text-capitalize ps-3'>ROLE: {$form_comment['role_name']}. </h6>
+                            </div> 
+                        </div>
+                      </div>
+                    </div>
+                    <div class='card-body  pb-2'>
+                      <div class='row'>
+                        <div class='col-8'>
+                        <div class='row'> 
+                            <div class='col-6'>
+                            {$form_comment['comment']}
+                            </div>
+                      </div>
+                    </div>
+                    <div class='card-footer'>
+                      DATE: {$form_comment['comment_date']}
+                    </div>
+                  </div>
+                </div>
+                </div>
+              ";
+              }
+            ?>
         </div>
         <!--  body-->
         <?php include 'footer.php';?>

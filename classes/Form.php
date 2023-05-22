@@ -1,5 +1,33 @@
 <?php
  class Form {
+    public function form_comment($form_id)
+    {
+        try{
+            $db = getDB();
+            $stmt = $db->prepare("SELECT 
+                   frm_cmt.comment 
+                   ,frm_cmt.comment_date 
+                   ,stf_role.role_name
+                   ,stf.first_name
+                   ,stf.middle_name
+                   ,stf.last_name
+                FROM form_comment frm_cmt 
+                inner join staff  stf
+                on frm_cmt.staff = stf.staff_number
+                inner join staff_role stf_role
+                on stf_role.role_id = stf.staff_role
+                WHERE form=:form 
+                order by frm_cmt.comment_date desc
+             ");
+            $stmt->bindParam("form", $form_id,PDO::PARAM_STR);
+            $stmt->execute();
+            $data = $stmt->fetchAll();
+            return $data;
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
+    }
     public function form_detail($id)
     {
         try{
