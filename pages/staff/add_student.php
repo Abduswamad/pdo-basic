@@ -50,7 +50,7 @@
                 <div class="row">
                   <div class="col-2"></div>
                   <div class="col-8">
-                    <form role="form" action="../actions/action_add_student.php"  method="post"class="text-start">
+                    <form role="form" action="../actions/action_add_student.php"  enctype="multipart/form-data" method="post"class="text-start">
                       <div class="input-group input-group-outline my-3">
                         <input type="text" placeholder="Student Number"  required name="student_number"class="form-control">
                       </div>
@@ -86,6 +86,12 @@
                               }
                             ?>
                         </select>
+                      </div>
+                      <div class="input-group input-group-outline mb-3">
+                        <input type="number"   placeholder="completion Year " required name="completion_year" class="form-control">
+                      </div>
+                      <div class="input-group input-group-outline mb-3">
+                        <input type="file"    required name="image" class="form-control">
                       </div>
                       <div class="text-center">
                         <button type="submit" name="Submit"  class="btn bg-gradient-primary w-100 my-4 mb-2">Submit</button>

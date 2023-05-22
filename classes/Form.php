@@ -42,7 +42,8 @@
                 std.completion_year,
                 gnd.gender_name,
                 dpt.department_name,
-                fstp.step_name
+                fstp.step_name,
+                std.image
             FROM form frm
             inner join student std
             on std.student_number = frm.student

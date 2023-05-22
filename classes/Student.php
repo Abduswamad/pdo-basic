@@ -28,7 +28,7 @@
         }
     }
 
-    public function add_student($student_number,$first_name,$middle_name,$last_name,$gender,$student_department)
+    public function add_student($student_number,$first_name,$middle_name,$last_name,$gender,$student_department, $completion_year,$image_name)
     {
         try{
             
@@ -44,14 +44,16 @@
             }
             else
             {
-                $stmt = $db->prepare("Insert into student (student_number,first_name,middle_name,last_name,gender,department)
-                 values (:student_number,:first_name,:middle_name,:last_name,:gender,:student_department)");
+                $stmt = $db->prepare("Insert into student (student_number,first_name,middle_name,last_name,gender,department,completion_year,image)
+                 values (:student_number,:first_name,:middle_name,:last_name,:gender,:student_department,:completion_year,:image)");
                 $stmt->bindParam("student_number", $student_number,PDO::PARAM_STR);
                 $stmt->bindParam("first_name", $first_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("middle_name", $middle_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("last_name", $last_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("gender", $gender,PDO::PARAM_INT) ;
                 $stmt->bindParam("student_department", $student_department,PDO::PARAM_INT) ;
+                $stmt->bindParam("completion_year", $completion_year,PDO::PARAM_STR) ;
+                $stmt->bindParam("image", $image_name,PDO::PARAM_STR) ;
                 $stmt->execute();
                 $db = null;
                 return true;
@@ -60,6 +62,27 @@
         }
         catch(PDOException $e) {
             echo '{"error":{"add_student":'. $e->getMessage() .'}}';
+        }
+    }
+
+    public function upload_picture($image_name)
+    {
+        try{
+            $targetDirectory = __DIR__ . "/images/students/";
+            $targetFilePath = $targetDirectory . $image_name;
+            if (isset($_FILES["image"]) && $_FILES["image"]["error"] === UPLOAD_ERR_OK) {
+                $tempFilePath = $_FILES["image"]["tmp_name"];
+                if (move_uploaded_file($tempFilePath, $targetFilePath)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"upload_picture":'. $e->getMessage() .'}}';
         }
     }
 

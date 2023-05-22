@@ -99,7 +99,7 @@
                    </div>
                   </div>
                   <div class="col-4">
-                    image
+                    <img  style = "width:100%;height:150px" src="../../images/students/<?php echo   $form_detail->image?>"/>
                   </div>
                 </div>
               </div>
