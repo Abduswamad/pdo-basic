@@ -74,11 +74,14 @@
             $staff_role= $staff->staff_role;
             $department= $staff->department;
             if($staff_role == 100 ){
+                $staff_role= 8;
                 $stmt = $db->prepare("SELECT * FROM form frm 
                     inner join form_step fst on frm.form_step = fst.step_id
                     inner  join student std on std.student_number = frm.student
                     inner join department dpt  on dpt.department_number = std.department
+                    where frm.form_step = :staff_role
                 ");
+                 $stmt->bindParam("staff_role", $staff_role,PDO::PARAM_INT);
                 $stmt->execute();
                 $data = $stmt->fetchAll();
             }else if($staff_role == 7 ){

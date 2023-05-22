@@ -47,7 +47,18 @@
                         <h6 class="text-white  text-capitalize ps-3">STUDENT NUMBER  <?php echo  $form_detail->student ?></h6>
                       </div>
                       <div class="col-6 text-end "> 
-                          <a href="comment.php?id=<?php echo  $form_detail->form_id ?>" class="btn btn-outline-primary btn-sm mb-0 bg-white ">Comment</a>
+                      <?php
+                          if ($role != 100){
+                              echo "
+                                <a href='comment.php?id=" . $form_detail->form_id . "' class='btn btn-outline-primary btn-sm mb-0 bg-white '>Comment</a>
+                              ";
+                          }else{
+                            echo "
+                              <a href='#?id=" . $form_detail->form_id . "' class='btn btn-outline-primary btn-sm mb-0 bg-white '>Print</a>
+                          ";
+                          }
+                      ?>
+                          
                       </div> 
                   </div>
                 </div>
