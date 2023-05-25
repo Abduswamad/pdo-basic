@@ -1,5 +1,34 @@
 <?php
  class Account {
+    public function staff_profile($sessin_id)
+    {
+        try{
+            $db = getDB();
+            $stmt = $db->prepare("
+            SELECT 
+                stf.staff_number
+                ,stf.first_name
+                ,stf.middle_name
+                ,stf.last_name
+                ,stf.email
+                ,stf.title
+                ,dpt.department_name
+                ,str.role_name
+            FROM staff stf 
+            inner join department dpt
+            on  dpt.department_number  = stf.department 
+            inner join staff_role str
+            on str.role_id = stf.staff_role
+            WHERE staff_number=:staff_number");
+            $stmt->bindParam("staff_number", $sessin_id,PDO::PARAM_STR);
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_OBJ); //User data
+            return $data;
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
+    }
     public function staff_sign_up($reg_number,$email,$password)
     {
         try{

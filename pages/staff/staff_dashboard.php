@@ -57,12 +57,11 @@
                         $values[] = $row['value'];
                     }
                   ?>
-                  <div  class="row">
-                    <div class="col-12">
+                  <div   class="row">
+                    <div  class="col-12 ">
                       <canvas  id="form_statuses"></canvas>
                     </div>
                   </div>
-                  
                   <script>
                     var ctx = document.getElementById('form_statuses').getContext('2d');
                     var chart = new Chart(ctx, {
@@ -86,7 +85,8 @@
                             }
                         }
                     });
-                </script>
+                  </script>
+                 <div class="row"></div>
                 </div>
                 <div class="card-footer">
                   
