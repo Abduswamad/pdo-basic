@@ -1,5 +1,26 @@
 <?php
  class Student {
+    public function students()
+    {
+        try{
+            $db = getDB();
+            $stmt = $db->prepare("
+            SELECT 
+                step_name as 'status', 
+                count(*) as 'value' 
+            FROM form frm
+            inner join form_step fst
+            on frm.form_step = fst.step_id
+            GROUP by step_name
+             ");
+            $stmt->execute();
+            $data = $stmt->fetchAll();
+            return $data;
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
+    }
     public function get_all_student()
     {
         try{
