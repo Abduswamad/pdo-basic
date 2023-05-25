@@ -1,5 +1,68 @@
 <?php
  class Account {
+    public function student_change_password($student_number,$current_password,$new_password)
+    {
+        try{
+            $db = getDB();
+            $stmt = $db->prepare("SELECT * FROM student WHERE student_number=:student_number
+            and  password = :password");
+            $stmt->bindParam("student_number", $student_number,PDO::PARAM_STR);
+            $hash_password= hash('sha256', $current_password); 
+            $stmt->bindParam("password", $hash_password,PDO::PARAM_STR);
+            $stmt->execute();
+            $count=$stmt->rowCount();
+            if($count==1)
+            {
+                $stmt = $db->prepare("Update student set 
+                password = :hash_password where student_number = :student_number");
+                $hash_password= hash('sha256', $new_password); 
+                $stmt->bindParam("hash_password", $hash_password,PDO::PARAM_STR) ;
+                $stmt->bindParam("student_number", $student_number,PDO::PARAM_STR) ;
+                $stmt->execute();
+                $db = null;
+                return true;
+            }
+            else
+            {
+                $db = null;
+                return false;
+            }
+           
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"student_sign_up":'. $e->getMessage() .'}}';
+        }
+    }
+    public function student_profile($session_id)
+    {
+        try{
+            $db = getDB();
+            $stmt = $db->prepare("
+            SELECT 
+                std.student_number
+                ,std.image
+                ,std.first_name
+                ,std.middle_name
+                ,std.last_name
+                ,std.user_name
+                ,gnd.gender_name
+                ,dpt.department_name
+                ,std.completion_year
+            FROM student std 
+            inner join gender gnd
+            on gnd.gender_id = std.gender
+            inner join department dpt
+            on dpt.department_number = std.department
+            WHERE student_number=:student_number");
+            $stmt->bindParam("student_number", $session_id,PDO::PARAM_STR);
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_OBJ); //User data
+            return $data; 
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
+    }
     public function staff_change_password($staff_number,$current_password,$new_password)
     {
         try{
