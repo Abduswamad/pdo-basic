@@ -1,5 +1,38 @@
 <?php
  class Account {
+    public function staff_change_password($staff_number,$current_password,$new_password)
+    {
+        try{
+            $db = getDB();
+            $stmt = $db->prepare("SELECT * FROM staff WHERE staff_number=:staff_number
+            and  password = :password");
+            $stmt->bindParam("staff_number", $staff_number,PDO::PARAM_STR);
+            $hash_password= hash('sha256', $current_password); 
+            $stmt->bindParam("password", $hash_password,PDO::PARAM_STR);
+            $stmt->execute();
+            $count=$stmt->rowCount();
+            if($count==1)
+            {
+                $stmt = $db->prepare("Update staff set 
+                 password = :hash_password where staff_number = :staff_number");
+                $hash_password= hash('sha256', $new_password); 
+                $stmt->bindParam("hash_password", $hash_password,PDO::PARAM_STR) ;
+                $stmt->bindParam("staff_number", $staff_number,PDO::PARAM_STR) ;
+                $stmt->execute();
+                $db = null;
+                return true;
+            }
+            else
+            {
+                $db = null;
+                return false;
+            }
+           
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"student_sign_up":'. $e->getMessage() .'}}';
+        }
+    }
     public function staff_profile($sessin_id)
     {
         try{

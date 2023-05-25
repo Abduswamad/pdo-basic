@@ -98,6 +98,30 @@
                     <!-- <img  style = "width:100%;height:150px" src="../../images/students/<?php echo   $form_detail->image?>"/> -->
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-2"></div>
+                  <div class="col-8">
+                    <h1> Change Password</h1>
+                    <form role="form" action="../actions/action_staff_change_password.php"  method="post"class="text-start">
+                      <div class="input-group input-group-outline my-3">
+                        <input type="hidden" value="<?php echo  $staff_profile->staff_number ?>"  required name="staff_number"class="form-control">
+                      </div>
+                      <div class="input-group input-group-outline my-3">
+                        <input type="password" placeholder="Current Password"  required name="current_password"class="form-control">
+                      </div>
+                      <div class="input-group input-group-outline my-3">
+                        <input type="password" placeholder="New Password"  required name="new_password"class="form-control">
+                      </div>
+                      <div class="input-group input-group-outline my-3">
+                        <input type="password" placeholder="Confirm New Password"  required name="confirm_new_password"class="form-control">
+                      </div>
+                      <div class="text-center">
+                        <button type="submit" name="Submit"  class="btn bg-gradient-primary w-100 my-4 mb-2">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-2"></div>
+                </div>
               </div>
               <div class="card-footer">
                 
