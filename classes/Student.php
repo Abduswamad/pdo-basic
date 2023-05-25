@@ -6,12 +6,12 @@
             $db = getDB();
             $stmt = $db->prepare("
             SELECT 
-                step_name as 'status', 
+                department_name as 'status', 
                 count(*) as 'value' 
-            FROM form frm
-            inner join form_step fst
-            on frm.form_step = fst.step_id
-            GROUP by step_name
+            FROM student std
+            inner join department dpt
+            on std.department = dpt.department_number
+            GROUP by department_name
              ");
             $stmt->execute();
             $data = $stmt->fetchAll();

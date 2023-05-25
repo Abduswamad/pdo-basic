@@ -6,12 +6,12 @@
             $db = getDB();
             $stmt = $db->prepare("
             SELECT 
-                step_name as 'status', 
+                role_name as 'status', 
                 count(*) as 'value' 
-            FROM form frm
-            inner join form_step fst
-            on frm.form_step = fst.step_id
-            GROUP by step_name
+            FROM staff stf
+            inner join staff_role str
+            on stf.staff_role = str.role_id
+            GROUP by role_name
              ");
             $stmt->execute();
             $data = $stmt->fetchAll();

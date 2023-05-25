@@ -4,8 +4,8 @@
     $page_tittle = "STAFF DASHBOARD ";
     $SessinUser=$account_class->staff_session_detail($login_session_id);
     $form_statuses=$form_class->form_statuses();
-    $staffs=$form_class->staffs();
-    $students=$form_class->students();
+    $staffs=$staff_class->staffs();
+    $students=$student_class->students();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,7 +103,7 @@
                 <?php
                   $statuses = array();
                   $values = array();
-                  foreach ($form_statuses as $row) {
+                  foreach ($staffs as $row) {
                       $statuses[] = $row['status'];
                       $values[] = $row['value'];
                   }
@@ -153,7 +153,7 @@
                 <?php
                   $statuses = array();
                   $values = array();
-                  foreach ($form_statuses as $row) {
+                  foreach ($students as $row) {
                       $statuses[] = $row['status'];
                       $values[] = $row['value'];
                   }
