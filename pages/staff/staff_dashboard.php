@@ -33,67 +33,161 @@
         </h6>
         <!--  body-->
         <div class="row"></div>
-          <div class="row">
-            <div class="col-12">
-              <div class="card my-4">
-                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                  <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                    <div class="row">
-                        <div class="col-6">
-                          <h6 class="text-white  text-capitalize ps-3">FORM STATUS  </h6>
-                        </div>
-                        <!-- <div class="col-6 text-end "> 
-                            <a href="./add_staff.php" class="btn btn-outline-primary btn-sm mb-0 bg-white ">Add Staff</a>
-                        </div> -->
+        <div class="row">
+          <div  class="col-12 ">
+            <div class="card my-4">
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                  <div class="row">
+                    <div class="col-6">
+                      <h6 class="text-white  text-capitalize ps-3">FORM DASHBOARD  </h6>
                     </div>
                   </div>
                 </div>
-                <div class="card-body px-0 pb-2">
-                  <?php
-                    $statuses = array();
-                    $values = array();
-                    foreach ($form_statuses as $row) {
-                        $statuses[] = $row['status'];
-                        $values[] = $row['value'];
-                    }
-                  ?>
-                  <div   class="row">
-                    <div  class="col-12 ">
-                      <canvas  id="form_statuses"></canvas>
-                    </div>
-                  </div>
-                  <script>
-                    var ctx = document.getElementById('form_statuses').getContext('2d');
-                    var chart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: <?php echo json_encode($statuses); ?>,
-                            datasets: [{
-                                label: 'Count',
-                                data: <?php echo json_encode($values); ?>,
-                                backgroundColor: 'rgba(0, 123, 255, 0.5)',
-                                borderColor: 'rgba(0, 123, 255, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-                  </script>
-                 <div class="row"></div>
-                </div>
-                <div class="card-footer">
-                  
-                </div>
+              </div>
+              <div class="card-body px-0 pb-2">
+                <?php
+                  $form_status = array();
+                  $form_value = array();
+                  foreach ($form_statuses as $row) {
+                      $form_status[] = $row['status'];
+                      $form_value[] = $row['value'];
+                  }
+                ?>
+                <canvas  id="forms"></canvas>
+                <script>
+                  var ctx = document.getElementById('forms').getContext('2d');
+                  var chart = new Chart(ctx, {
+                      type: 'bar',
+                      data: {
+                          labels: <?php echo json_encode($form_status); ?>,
+                          datasets: [{
+                              label: 'Count',
+                              data: <?php echo json_encode($form_value); ?>,
+                              backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                              borderColor: 'rgba(0, 123, 255, 1)',
+                              borderWidth: 1
+                          }]
+                      },
+                      options: {
+                          responsive: true,
+                          scales: {
+                              y: {
+                                  beginAtZero: true
+                              }
+                          }
+                      }
+                  });
+                </script>
+              </div>
+              <div class="card-footer">
               </div>
             </div>
           </div>
+        </div>
+        <div class="row">
+          <div  class="col-6 ">
+            <div class="card my-4">
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                  <div class="row">
+                    <div class="col-6">
+                      <h6 class="text-white  text-capitalize ps-3">STAFF DASHBOARD  </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body px-0 pb-2">
+                <?php
+                  $statuses = array();
+                  $values = array();
+                  foreach ($form_statuses as $row) {
+                      $statuses[] = $row['status'];
+                      $values[] = $row['value'];
+                  }
+                ?>
+                <canvas  id="staffs"></canvas>
+                <script>
+                  var ctx = document.getElementById('staffs').getContext('2d');
+                  var chart = new Chart(ctx, {
+                      type: 'line',
+                      data: {
+                          labels: <?php echo json_encode($statuses); ?>,
+                          datasets: [{
+                              label: 'Count',
+                              data: <?php echo json_encode($values); ?>,
+                              backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                              borderColor: 'rgba(0, 123, 255, 1)',
+                              borderWidth: 1
+                          }]
+                      },
+                      options: {
+                          responsive: true,
+                          scales: {
+                              y: {
+                                  beginAtZero: true
+                              }
+                          }
+                      }
+                  });
+                </script>
+              </div>
+              <div class="card-footer">
+              </div>
+            </div>
+          </div>
+          <div  class="col-6 ">
+            <div class="card my-4">
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                  <div class="row">
+                    <div class="col-6">
+                      <h6 class="text-white  text-capitalize ps-3">STUDENT DASHBOARD  </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body px-0 pb-2">
+                <?php
+                  $statuses = array();
+                  $values = array();
+                  foreach ($form_statuses as $row) {
+                      $statuses[] = $row['status'];
+                      $values[] = $row['value'];
+                  }
+                ?>
+                <canvas  id="students"></canvas>
+                <script>
+                  var ctx = document.getElementById('students').getContext('2d');
+                  var chart = new Chart(ctx, {
+                      type: 'line',
+                      data: {
+                          labels: <?php echo json_encode($statuses); ?>,
+                          datasets: [{
+                              label: 'Count',
+                              data: <?php echo json_encode($values); ?>,
+                              backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                              borderColor: 'rgba(0, 123, 255, 1)',
+                              borderWidth: 1
+                          }]
+                      },
+                      options: {
+                          responsive: true,
+                          scales: {
+                              y: {
+                                  beginAtZero: true
+                              }
+                          }
+                      }
+                  });
+                </script>
+              </div>
+              <div class="card-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row"></div>
         <!--  body-->
         <?php include 'footer.php';?>
       </div>
