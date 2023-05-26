@@ -40,7 +40,7 @@
           <div class="col-12">
             <div class="card my-4">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <div  style="background-color:#fd7e14" class="bg-gradient shadow-primary border-radius-lg pt-4 pb-3">
                   <div class="row">
                       <div class="col-6">
                         <h6 class="text-white  text-capitalize ps-3">STUDENT NUMBER  <?php echo  $login_session_id?></h6>
@@ -118,7 +118,7 @@
                   <div class='col-12'>
                   <div class='card my-4'>
                     <div class='card-header p-0 position-relative mt-n4 mx-3 z-index-2'>
-                      <div class='bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3'>
+                      <div class='bg-gradient-dark shadow-primary border-radius-lg pt-4 pb-3'>
                         <div class='row'>
                             <div class='col-6'>
                               <h6 class='text-white  text-capitalize ps-3'>COMENTOR: {$form_comment['last_name']}, {$form_comment['first_name']} {$form_comment['middle_name']}. </h6>

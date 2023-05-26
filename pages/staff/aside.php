@@ -1,7 +1,7 @@
 <?php
     $role = $SessinUser->staff_role;
 ?>
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+<aside style="background-color:#203354" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient" id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="./staff_dashboard.php" >
@@ -79,7 +79,7 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
     <div class="mx-3 text-center">
-        V0.1
+        V1.0
     </div>
     </div>
 </aside>
