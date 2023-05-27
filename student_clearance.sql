@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2023 at 09:35 AM
+-- Generation Time: May 27, 2023 at 09:31 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -37,7 +37,13 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`department_name`, `department_number`) VALUES
-('Computer System And Mathematics', 1);
+('Geospatial science and technologies and Computer Science And Mathematics', 1),
+('land management and valuation and business studies', 2),
+('urban and regional planning', 3),
+('economics and social studies', 4),
+('civil engineering', 5),
+('building economics $ civil engineering', 6),
+('architecture and interior design', 7);
 
 -- --------------------------------------------------------
 
@@ -50,6 +56,15 @@ CREATE TABLE `form` (
   `student` varchar(50) NOT NULL,
   `form_step` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `form`
+--
+
+INSERT INTO `form` (`form_id`, `student`, `form_step`) VALUES
+(7, '25819T2020', 8),
+(8, '2408T2020', 1),
+(9, '25040T2020', 1);
 
 -- --------------------------------------------------------
 
@@ -65,6 +80,19 @@ CREATE TABLE `form_comment` (
   `comment_date` datetime NOT NULL,
   `step` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `form_comment`
+--
+
+INSERT INTO `form_comment` (`comment_id`, `form`, `staff`, `comment`, `comment_date`, `step`) VALUES
+(9, 7, '101', 'nimekubali', '2023-05-27 09:24:28', 1),
+(10, 7, '102', 'nimekubali', '2023-05-27 09:31:05', 2),
+(11, 7, '103', 'nimekubali', '2023-05-27 10:05:09', 3),
+(12, 7, '104', 'nimekubali', '2023-05-27 10:09:45', 4),
+(13, 7, '105', 'nimekubali', '2023-05-27 10:11:59', 5),
+(14, 7, '106', 'nimekubali', '2023-05-27 10:13:27', 6),
+(15, 7, '107', 'nimekubali', '2023-05-27 10:15:48', 7);
 
 -- --------------------------------------------------------
 
@@ -88,7 +116,8 @@ INSERT INTO `form_step` (`step_id`, `step_name`) VALUES
 (4, 'Accounts Section'),
 (5, 'Director of Students Services'),
 (6, 'Academic Administration'),
-(7, 'Head Of Department');
+(7, 'Head Of Department'),
+(8, 'Complete');
 
 -- --------------------------------------------------------
 
@@ -132,6 +161,14 @@ CREATE TABLE `staff` (
 --
 
 INSERT INTO `staff` (`staff_number`, `first_name`, `middle_name`, `staff_role`, `email`, `password`, `last_name`, `department`, `title`) VALUES
+('100', 'veronica', 'leo', 100, 'admin@ardhi.tz', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'admin', 1, ''),
+('101', 'anna', 'joseph', 1, 'librarian@ardhi.tz', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'leonard', 1, ''),
+('102', 'abdul', 'ally', 2, 'gamecoach@ardhi.tz', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'iddy', 1, ''),
+('103', 'juma', 'crispo', 3, 'hallsofresidence@ardhi.tz', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'happy', 1, ''),
+('104', 'pendo', 'wetu', 4, 'accountsection@ardhi.tz', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'bonny', 5, ''),
+('105', 'penina', 'job', 5, 'directorofstudentsservices@ardhi.tz', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'sawa', 3, ''),
+('106', 'frenk', 'karibu', 6, 'academicadministration@ardhi.tz', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'system', 7, ''),
+('107', 'ammy', 'kivambe', 7, 'headofdepartment@ardhi.tz', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'lily', 1, ''),
 ('admin_number', 'clarencen', 'clarencen', 100, 'admin@ardhi.edu.tz', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'lane', 1, '');
 
 -- --------------------------------------------------------
@@ -152,6 +189,10 @@ CREATE TABLE `staff_role` (
 INSERT INTO `staff_role` (`role_id`, `role_name`) VALUES
 (1, 'Librarian'),
 (2, 'Game Coach'),
+(3, 'Halls of Residence'),
+(4, 'Accounts Section'),
+(5, 'Director of Students Services'),
+(6, 'Academic Administration'),
 (7, 'Head Of Department'),
 (100, 'Admin');
 
@@ -170,8 +211,21 @@ CREATE TABLE `student` (
   `last_name` varchar(50) NOT NULL,
   `gender` int(11) NOT NULL,
   `department` int(11) NOT NULL,
-  `completion_year` int(11) NOT NULL
+  `completion_year` int(11) NOT NULL,
+  `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`student_number`, `user_name`, `password`, `first_name`, `middle_name`, `last_name`, `gender`, `department`, `completion_year`, `image`) VALUES
+('2314T2017', 'mweri@ardhi.tz', 'c11b86c7acf191572cf7cc32dc221d3125618e1aa8f26d988002be82047953ef', 'mweri', 'katavi', 'mwanza', 2, 2, 2017, 'P2314T2017.png'),
+('2390T2020', 'gaudensia@ardhi.tz', 'ce414a7a53a28e6329a42a124a85d2349614a1e7d6d7e1fbec20b22e0b0da721', 'gaudensia', 'crispo', 'kika', 1, 1, 2020, 'P2390T2020.png'),
+('2408T2020', 'ally@ardhi.tz', '7f41a1bd34b0005cc7e2341f97ac1b23820fb26bd157cd4be4e4105404b7a981', 'ally', 'jonathan', 'george', 2, 5, 2018, 'P2408T2020.png'),
+('2452T2019', '', '', 'imma', 'baraka', 'martini', 2, 7, 2017, 'P2452T2019.png'),
+('25040T2020', 'lecho@ardhi.tz', '041901db67badfbe9d7b6dae090cc013a3144f2b981ef7f9df97b3e9a3f85c51', 'lecho', 'ety', 'kika', 1, 3, 2021, 'P25040T2020.png'),
+('25819T2020', 'loverina@ardhi.tz', 'c61bbd0ba095e89e4cfdb9be575a31cba5b1f558df4931b307b769fe99ac30ac', 'loverina', 'crispo', 'mtesigwa', 1, 1, 2022, 'P25819T2020.png');
 
 --
 -- Indexes for dumped tables
@@ -242,13 +296,13 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `form`
 --
 ALTER TABLE `form`
-  MODIFY `form_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `form_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `form_comment`
 --
 ALTER TABLE `form_comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
