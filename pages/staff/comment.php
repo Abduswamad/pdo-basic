@@ -58,7 +58,7 @@
                       <input type= "hidden" name="form" value = "<?php  echo $id ;?>"></input>
                       <input type= "hidden" name="staff_id" value = "<?php  echo $login_session_id ;?>"></input>
                       <div class="input-group input-group-outline my-3">
-                       <textarea   placeholder="Comment" id="comment" name="comment" rows="10"  required   class="form-control"></textarea>
+                       <textarea   placeholder="Comment" id="comment" name="comment" rows="10"     class="form-control"></textarea>
                       </div>
                       <div class="input-group input-group-outline mb-3">
                         <select class="form-control" name="decission"  required>
