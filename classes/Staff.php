@@ -65,6 +65,41 @@
         }
     }
 
+    public function add_staff_full($staff_number,$first_name,$middle_name,$last_name,$staff_role,$staff_department)
+    {
+        try{
+            $db = getDB();
+            $stmt = $db->prepare("SELECT * FROM staff WHERE staff_number=:staff_number");
+            $stmt->bindParam("staff_number", $staff_number,PDO::PARAM_STR);
+            $stmt->execute();
+            $count=$stmt->rowCount();
+            if($count==1)
+            { 
+                
+                $db = null;
+                return false;
+            }
+            else
+            {
+                $stmt = $db->prepare("Insert into staff (staff_number,first_name,middle_name,last_name,staff_role,department)
+                 values (:staff_number,:first_name,:middle_name,:last_name,:staff_role,:staff_department)");
+                $stmt->bindParam("staff_number", $staff_number,PDO::PARAM_STR);
+                $stmt->bindParam("first_name", $first_name,PDO::PARAM_STR) ;
+                $stmt->bindParam("middle_name", $middle_name,PDO::PARAM_STR) ;
+                $stmt->bindParam("last_name", $last_name,PDO::PARAM_STR) ;
+                $stmt->bindParam("staff_role", $staff_role,PDO::PARAM_INT) ;
+                $stmt->bindParam("staff_department", $staff_department,PDO::PARAM_INT) ;
+                $stmt->execute();
+                $db = null;
+                return true;
+            }
+           
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"add_staff":'. $e->getMessage() .'}}';
+        }
+    }
+
     public function add_staff($staff_number,$first_name,$middle_name,$last_name,$staff_role,$staff_department)
     {
         try{

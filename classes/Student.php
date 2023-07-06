@@ -49,6 +49,39 @@
         }
     }
 
+    public function add_student_full($student_number,$first_name,$middle_name,$last_name,$gender,$student_department, $completion_year,$image_name)
+    {
+        try{
+            
+            $db = getDB();
+            $stmt = $db->prepare("SELECT * FROM student WHERE student_number=:student_number");
+            $stmt->bindParam("student_number", $student_number,PDO::PARAM_STR);
+            $stmt->execute();
+            $count=$stmt->rowCount();
+            if($count==1)
+            { 
+                $db = null;
+                return false;
+            }
+            else
+            {
+                $stmt = $db->prepare("Insert into student (student_number,first_name,middle_name,last_name,gender,department,completion_year,image)
+                 values (:student_number,:first_name,:middle_name,:last_name,:gender,:student_department,:completion_year,:image)");
+                $stmt->bindParam("student_number", $student_number,PDO::PARAM_STR);
+                $stmt->bindParam("first_name", $first_name,PDO::PARAM_STR) ;
+                $stmt->bindParam("middle_name", $middle_name,PDO::PARAM_STR) ;
+                $stmt->bindParam("last_name", $last_name,PDO::PARAM_STR) ;
+                $stmt->bindParam("gender", $gender,PDO::PARAM_INT) ;
+                $stmt->bindParam("student_department", $student_department,PDO::PARAM_INT) ;
+                $stmt->bindParam("completion_year", $completion_year,PDO::PARAM_STR) ;
+                $stmt->bindParam("image", $image_name,PDO::PARAM_STR) ;
+                $stmt->execute();
+                $db = null;
+                return true;
+            }
+           
+        }
+
     public function add_student($student_number,$first_name,$middle_name,$last_name,$gender,$student_department, $completion_year,$image_name)
     {
         try{
