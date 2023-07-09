@@ -93,6 +93,12 @@
                       <div class="input-group input-group-outline mb-3">
                         <input type="file"    required name="image" class="form-control">
                       </div>
+                      <div class="input-group input-group-outline mb-3">
+                        <input type="password"   placeholder="Password " required name="password" class="form-control">
+                      </div> 
+                      <div class="input-group input-group-outline mb-3">
+                        <input type="password"   placeholder=" Confirm Password " required name="confirm_password" class="form-control">
+                      </div>
                       <div class="text-center">
                         <button style="background-color:#fd7e14"  type="submit" name="Submit"  class="btn bg-gradient w-100 my-4 mb-2">Submit</button>
                       </div>

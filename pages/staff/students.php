@@ -43,7 +43,7 @@
                         <h6 class="text-white  text-capitalize ps-3">LIST OF STUDENTS </h6>
                       </div>
                       <div class="col-6 text-end "> 
-                          <a href="./add_student.php" class="btn btn-outline-primary btn-sm mb-0 bg-white ">Add Student</a>
+                          <a href="./add_student_full.php" class="btn btn-outline-primary btn-sm mb-0 bg-white ">Add Student</a>
                       </div>
                   </div>
                 </div>

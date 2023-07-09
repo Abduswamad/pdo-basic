@@ -43,7 +43,7 @@
                         <h6 class="text-white  text-capitalize ps-3">LIST OF STAFFS </h6>
                       </div>
                       <div class="col-6 text-end "> 
-                          <a href="./add_staff.php" class="btn btn-outline-primary btn-sm mb-0 bg-white ">Add Staff</a>
+                          <a href="./add_staff_full.php" class="btn btn-outline-primary btn-sm mb-0 bg-white ">Add Staff</a>
                       </div>
                   </div>
                 </div>

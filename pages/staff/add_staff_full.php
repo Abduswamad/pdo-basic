@@ -63,6 +63,7 @@
                       <div class="input-group input-group-outline mb-3">
                         <input type="text"   placeholder=" Last Name " required name="last_name" class="form-control">
                       </div>
+
                       <div class="input-group input-group-outline mb-3">
                         <select class="form-control" name="staff_role"  required>
                             <option value="">Select Staff Role</option>
@@ -86,6 +87,12 @@
                               }
                             ?>
                         </select>
+                      </div>
+                      <div class="input-group input-group-outline mb-3">
+                        <input type="password"   placeholder="Password " required name="password" class="form-control">
+                      </div> 
+                      <div class="input-group input-group-outline mb-3">
+                        <input type="password"   placeholder=" Confirm Password " required name="confirm_password" class="form-control">
                       </div>
                       <div class="text-center">
                         <button style="background-color:#fd7e14" type="submit" name="Submit"  class="btn bg-gradient w-100 my-4 mb-2">Submit</button>

@@ -70,10 +70,10 @@
                   <div class="text-center">
                     <button type="submit" style="background-color:#fd7e14"  class="btn bg-gradient  w-100 my-4 mb-2">Sign in</button>
                   </div>
-                  <p class="mt-4 text-sm text-center">
+                  <!-- <p class="mt-4 text-sm text-center">
                     Don't have an account?
                     <a  style="background-color:#28a745;" style ="font-color:" href="pages/sign_up.php" class=" text-gradient font-weight-bold">Sign up</a>
-                  </p>
+                  </p> -->
                 </form>
               </div>
             </div>

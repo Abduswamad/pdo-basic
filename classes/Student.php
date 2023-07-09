@@ -49,7 +49,7 @@
         }
     }
 
-    public function add_student_full($student_number,$first_name,$middle_name,$last_name,$gender,$student_department, $completion_year,$image_name)
+    public function add_student_full($student_number,$first_name,$middle_name,$last_name,$gender,$student_department, $completion_year,$image_name,$password)
     {
         try{
             
@@ -65,8 +65,8 @@
             }
             else
             {
-                $stmt = $db->prepare("Insert into student (student_number,first_name,middle_name,last_name,gender,department,completion_year,image)
-                 values (:student_number,:first_name,:middle_name,:last_name,:gender,:student_department,:completion_year,:image)");
+                $stmt = $db->prepare("Insert into student (student_number,first_name,middle_name,last_name,gender,department,completion_year,image,password)
+                 values (:student_number,:first_name,:middle_name,:last_name,:gender,:student_department,:completion_year,:image,:hash_password)");
                 $stmt->bindParam("student_number", $student_number,PDO::PARAM_STR);
                 $stmt->bindParam("first_name", $first_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("middle_name", $middle_name,PDO::PARAM_STR) ;
@@ -75,6 +75,8 @@
                 $stmt->bindParam("student_department", $student_department,PDO::PARAM_INT) ;
                 $stmt->bindParam("completion_year", $completion_year,PDO::PARAM_STR) ;
                 $stmt->bindParam("image", $image_name,PDO::PARAM_STR) ;
+                $hash_password= hash('sha256', $password); 
+                $stmt->bindParam("hash_password", $hash_password,PDO::PARAM_STR) ;
                 $stmt->execute();
                 $db = null;
                 return true;
