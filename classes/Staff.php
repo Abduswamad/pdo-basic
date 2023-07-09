@@ -65,7 +65,7 @@
         }
     }
 
-    public function add_staff_full($staff_number,$first_name,$middle_name,$last_name,$staff_role,$staff_department,$password)
+    public function add_staff_full($staff_number,$first_name,$middle_name,$last_name,$staff_role,$staff_department,$password,$email)
     {
         try{
             $db = getDB();
@@ -81,8 +81,8 @@
             }
             else
             {
-                $stmt = $db->prepare("Insert into staff (staff_number,first_name,middle_name,last_name,staff_role,department,password)
-                 values (:staff_number,:first_name,:middle_name,:last_name,:staff_role,:staff_department,:hash_password)");
+                $stmt = $db->prepare("Insert into staff (staff_number,first_name,middle_name,last_name,staff_role,department,password,email)
+                 values (:staff_number,:first_name,:middle_name,:last_name,:staff_role,:staff_department,:hash_password,:email)");
                 $stmt->bindParam("staff_number", $staff_number,PDO::PARAM_STR);
                 $stmt->bindParam("first_name", $first_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("middle_name", $middle_name,PDO::PARAM_STR) ;
@@ -91,6 +91,7 @@
                 $stmt->bindParam("staff_department", $staff_department,PDO::PARAM_INT) ;
                 $hash_password= hash('sha256', $password); 
                 $stmt->bindParam("hash_password", $hash_password,PDO::PARAM_STR) ;
+                $stmt->bindParam("email", $email,PDO::PARAM_STR);
                 $stmt->execute();
                 $db = null;
                 return true;

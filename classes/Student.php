@@ -49,10 +49,9 @@
         }
     }
 
-    public function add_student_full($student_number,$first_name,$middle_name,$last_name,$gender,$student_department, $completion_year,$image_name,$password)
+    public function add_student_full($student_number,$first_name,$middle_name,$last_name,$gender,$student_department, $completion_year,$image_name,$password,$email)
     {
         try{
-            
             $db = getDB();
             $stmt = $db->prepare("SELECT * FROM student WHERE student_number=:student_number");
             $stmt->bindParam("student_number", $student_number,PDO::PARAM_STR);
@@ -65,8 +64,8 @@
             }
             else
             {
-                $stmt = $db->prepare("Insert into student (student_number,first_name,middle_name,last_name,gender,department,completion_year,image,password)
-                 values (:student_number,:first_name,:middle_name,:last_name,:gender,:student_department,:completion_year,:image,:hash_password)");
+                $stmt = $db->prepare("Insert into student (student_number,first_name,middle_name,last_name,gender,department,completion_year,image,password,user_name)
+                 values (:student_number,:first_name,:middle_name,:last_name,:gender,:student_department,:completion_year,:image,:hash_password,:email)");
                 $stmt->bindParam("student_number", $student_number,PDO::PARAM_STR);
                 $stmt->bindParam("first_name", $first_name,PDO::PARAM_STR) ;
                 $stmt->bindParam("middle_name", $middle_name,PDO::PARAM_STR) ;
@@ -77,13 +76,18 @@
                 $stmt->bindParam("image", $image_name,PDO::PARAM_STR) ;
                 $hash_password= hash('sha256', $password); 
                 $stmt->bindParam("hash_password", $hash_password,PDO::PARAM_STR) ;
+                $stmt->bindParam("email", $email,PDO::PARAM_STR) ;
                 $stmt->execute();
                 $db = null;
                 return true;
             }
            
         }
+        catch(PDOException $e) {
+            echo '{"error":{"add_student":'. $e->getMessage() .'}}';
+        }
 
+    }
     public function add_student($student_number,$first_name,$middle_name,$last_name,$gender,$student_department, $completion_year,$image_name)
     {
         try{

@@ -63,7 +63,9 @@
                       <div class="input-group input-group-outline mb-3">
                         <input type="text"   placeholder=" Last Name " required name="last_name" class="form-control">
                       </div>
-
+                      <div class="input-group input-group-outline my-3">
+                        <input type="email"  required placeholder="Email" name="email" class="form-control">
+                      </div>
                       <div class="input-group input-group-outline mb-3">
                         <select class="form-control" name="staff_role"  required>
                             <option value="">Select Staff Role</option>
